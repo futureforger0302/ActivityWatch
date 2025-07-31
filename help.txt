@@ -1,0 +1,71 @@
+-----------------install packages---------------
+pip install poetry==1.3.2
+poetry install
+
+pip install pyinstaller
+python -m PyInstaller aw.spec
+
+pip install PyQt6
+pip install PyQt6 PyQt6-Qt6 PyQt6-sip
+pip install "PyQt6==6.5.3" "PyQt6-Qt6==6.5.3"
+
+pip install pyautogui pillow
+pip install mss
+
+----------------- compile exe files---------------
+
+
+cd aw-core
+pip install -e .
+cd ..
+cd aw-qt
+pip install -e .
+cd ..
+cd aw-server
+pip install -e .
+cd ..
+cd aw-watcher-afk
+pip install -e .
+cd ..
+cd aw-watcher-window
+pip install -e .
+cd ..
+cd aw-watcher-input
+pip install -e .
+cd ..
+cd aw-notify
+pip install -e .
+cd ..
+
+
+cd aw-qt
+python -m PyInstaller aw-qt.spec
+cd ..
+
+cd aw-server
+python -m PyInstaller aw-server.spec
+cd ..
+
+cd aw-watcher-window
+python -m PyInstaller aw-watcher-window.spec
+cd ..
+
+cd aw-watcher-afk
+python -m PyInstaller aw-watcher-afk.spec
+cd ..
+
+cd aw-notify
+python -m PyInstaller aw-notify.spec
+cd ..
+
+cd aw-webui
+npm install
+npm run build
+Copy-Item -Recurse -Force aw-webui\dist\* aw-server\aw_server\static\
+
+copy all files to the root/dist/activitywatch folder
+
+$env:AW_VERSION = "0.13.2"
+& "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" scripts\package\activitywatch-setup.iss
+
+

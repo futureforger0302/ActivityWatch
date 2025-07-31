@@ -1,0 +1,54 @@
+{
+    "{{chrome}}.manifest_version": 3,
+    "{{firefox}}.manifest_version": 2,
+
+    "name": "ActivityWatch Web Watcher",
+    "description": "Log the current tab and your browser activity with ActivityWatch.",
+    "version": "0.5.3",
+    "icons": {
+        "128": "logo-128.png"
+    },
+
+    "{{chrome}}.action": {
+        "default_icon": { "128": "logo-128.png" },
+        "default_popup": "src/popup/index.html"
+    },
+    "{{firefox}}.browser_action": {
+        "default_icon": "logo-128.png",
+        "default_popup": "src/popup/index.html"
+    },
+
+    "background": {
+        "{{chrome}}.service_worker": "src/background/main.ts",
+        "{{firefox}}.scripts": ["src/background/main.ts"],
+        "{{firefox}}.persistent": true
+    },
+
+    "options_ui": {
+        "page": "src/settings/index.html"
+    },
+
+    "{{firefox}}.permissions": [
+        "tabs",
+        "alarms",
+        "notifications",
+        "activeTab",
+        "storage",
+        "http://127.0.0.1:5600/api/*",
+        "http://127.0.0.1:5666/api/*"
+    ],
+    "{{chrome}}.permissions": [
+        "tabs",
+        "alarms",
+        "notifications",
+        "activeTab",
+        "storage"
+    ],
+    "{{chrome}}.host_permissions": ["<all_urls>"],
+
+    "{{firefox}}.browser_specific_settings": {
+        "gecko": {
+            "id": "{ef87d84c-2127-493f-b952-5b4e744245bc}"
+        }
+    }
+}
